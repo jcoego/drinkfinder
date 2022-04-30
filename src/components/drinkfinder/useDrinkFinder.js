@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react";
 import { getUrl } from "../../utils/config";
+import { arrayIntersection } from "../../utils/utils";
 
 
 const transformComboData = (combos) =>{
@@ -83,61 +84,63 @@ const useDrinkFinder = (combos)=>{
         setLoading(true);
         setError(null);
         setResult(null);
-        let isQueryFromDb = false;
-        let dataFromDatabase = []
+        let filteredByName = null;
+        let filteredByAlcoholic = null;
+        let filteredByCategory = null;
+        let filteredByGlass = null;
+        let filteredByIngredient = null;
         if(!searchFields.name && searchFields.alcoholic !=='Alcoholic' && 
           !searchFields.category && !searchFields.glass && !searchFields.ingredient){
             throw new Error('No filters Found. At least one filter is mandatory');
         }
         if(searchFields.name){
-          dataFromDatabase = await axios.get(`${getUrl()}/search.php?s=${searchFields.name}`);
-          dataFromDatabase = dataFromDatabase.data;
-          isQueryFromDb = true;
+          filteredByName = await axios.get(`${getUrl()}/search.php?s=${searchFields.name}`);
+          filteredByName = filteredByName && filteredByName.data ? filteredByName.data : [];
         }
         if(searchFields.alcoholic==='Alcoholic'){
-          if(isQueryFromDb){
-            dataFromDatabase = dataFromDatabase.filter(data => data.strAlcoholic ==='Alcoholic')
-          }else{
-            dataFromDatabase = await axios.get(`${getUrl()}/filter.php?a=Alcoholic`);
-            dataFromDatabase = dataFromDatabase.data;
-            isQueryFromDb = true;
-          }
+          filteredByAlcoholic = await axios.get(`${getUrl()}/filter.php?a=Alcoholic`);
+          filteredByAlcoholic = filteredByAlcoholic && filteredByAlcoholic.data ? filteredByAlcoholic.data : [];
         }
         if(searchFields.category){
-          if(isQueryFromDb){
-            dataFromDatabase = dataFromDatabase.filter(data => data.strCategory ===searchFields.category)
-          }else{
-            dataFromDatabase = await axios.get(`${getUrl()}/filter.php?c=${searchFields.category}`);
-            dataFromDatabase = dataFromDatabase.data;
-            isQueryFromDb = true;
-          }
+        
+          filteredByCategory = await axios.get(`${getUrl()}/filter.php?c=${searchFields.category}`);
+          filteredByCategory = filteredByCategory && filteredByCategory.data ? filteredByCategory.data : [];
+          
         }
         if(searchFields.glass){
-          if(isQueryFromDb){
-            dataFromDatabase = dataFromDatabase.filter(data => data.strCategory ===searchFields.glass)
-          }else{
-            dataFromDatabase = await axios.get(`${getUrl()}/filter.php?g=${searchFields.glass}`);
-            dataFromDatabase = dataFromDatabase.data;
-            isQueryFromDb = true;
-          }
+          filteredByGlass = await axios.get(`${getUrl()}/filter.php?g=${searchFields.glass}`);
+          filteredByGlass = filteredByGlass && filteredByGlass.data ? filteredByGlass.data : [];
         }
         if(searchFields.ingredient){
-          if(isQueryFromDb){
-            dataFromDatabase = dataFromDatabase.filter(data => {
-              for(let key in data){
-                if(key.indexOf('strIngredient')!==-1 && data[key]===searchFields.ingredient){
-                  return true;
-                }
-              }
-              return false
-            })
-          }else{
-            dataFromDatabase = await axios.get(`${getUrl()}/search.php?i=${searchFields.ingredient}`);
-            dataFromDatabase = dataFromDatabase.data;
-            isQueryFromDb = true;
-          }
+          filteredByIngredient = await axios.get(`${getUrl()}/search.php?i=${searchFields.ingredient}`);
+          filteredByIngredient = filteredByIngredient && filteredByIngredient.data ? filteredByIngredient.data : [];
         }
-        setResult(dataFromDatabase);
+
+        //transform arrays in array of ids.
+        if (filteredByName) filteredByName =  filteredByName.drinks ? filteredByName.drinks.map(f => f.idDrink) : []
+        if (filteredByAlcoholic) filteredByAlcoholic =  filteredByAlcoholic.drinks ? filteredByAlcoholic.drinks.map(f => f.idDrink) : []
+        if (filteredByCategory) filteredByCategory = filteredByCategory.drinks ? filteredByCategory.drinks.map(f => f.idDrink) : []
+        if (filteredByGlass) filteredByGlass =  filteredByGlass.drinks ? filteredByGlass.drinks.map(f => f.idDrink) : []
+        if (filteredByIngredient) filteredByIngredient = filteredByIngredient.drinks ? filteredByIngredient.drinks.map(f => f.idDrink) : []
+        
+        //proccess received data to get common registers.
+        let filteredResult = []
+        filteredResult = arrayIntersection(filteredByName,filteredByAlcoholic);
+        filteredResult = arrayIntersection(filteredResult,filteredByCategory);
+        filteredResult = arrayIntersection(filteredResult,filteredByGlass);
+        filteredResult = arrayIntersection(filteredResult,filteredByIngredient);
+        filteredResult= filteredResult===null ? [] : filteredResult;
+
+        //get drinks for id.
+        let drinks = []
+        for(let filteredResultId of filteredResult){
+          let drink = await axios.get(`${getUrl()}/lookup.php?i=${filteredResultId}`);
+          drink = drink && drink.data && drink.data.drinks && drink.data.drinks[0] ? drink.data.drinks[0] :  null;
+          if(drink) drinks.push(drink);
+        }
+      
+
+        setResult(drinks);
         setError(null)
 
       }catch(err){
