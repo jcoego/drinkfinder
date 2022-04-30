@@ -3,6 +3,8 @@ import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
+import Button from '@mui/material/Button';
+import SearchIcon from '@mui/icons-material/Search';
 
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
@@ -11,13 +13,13 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
 import MySelect from '../common/MySelect';
+import { width } from '@mui/system';
 
 const DrinkFinderSearchView = ({comboCategories=[], comboGlasses=[], comboIngredients=[], comboAlocholic=[],
                                 category='', glass='', ingredient='', alcoholic='', name='',
                                 onChange=()=>{},
                                 ...props})=>{
 
-                                  console.log('alcoholicJCM',alcoholic)
   return  <Box 
             sx={{margin:'40px 40px 20px 40px', display: 'flex', 
             flexWrap:'wrap', justifyContent:'center' }}>
@@ -68,6 +70,7 @@ const DrinkFinderSearchView = ({comboCategories=[], comboGlasses=[], comboIngred
                 value={''}
                 onChange={()=>{}}
                 label="Glass"
+                sx={{width:'25%'}}
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -76,6 +79,12 @@ const DrinkFinderSearchView = ({comboCategories=[], comboGlasses=[], comboIngred
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
               </Select>
+              
+              <div style = {{width: '100%'}}></div>
+
+              <Button variant="outlined" startIcon={<SearchIcon />}>
+                Search
+              </Button>
           </Box>
 }
 
