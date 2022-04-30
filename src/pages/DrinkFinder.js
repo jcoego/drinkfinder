@@ -1,9 +1,9 @@
-
+import DrinkFinderSearchView from "../components/drinkfinder/DrinkFinderSearchView";
 
 const DrinkFinder = ()=>{
 
   return <div>
-    DrinkFinder
+    <DrinkFinderSearchView />
   </div>
 
 
