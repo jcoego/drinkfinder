@@ -3,6 +3,7 @@ import DrinkFinderSearchView from "../components/drinkfinder/DrinkFinderSearchVi
 import { CombosContext } from "../components/providers/CombosProviders";
 import useDrinkFinder  from '../components/drinkfinder/useDrinkFinder';
 import QueryWrapper from "../components/common/QueryWrapper";
+import DrinkFinderResultsView from "../components/drinkfinder/DrinkFinderResultsView";
 
 const DrinkFinder = ()=>{
 
@@ -27,9 +28,8 @@ const DrinkFinder = ()=>{
     />
 
     <QueryWrapper loading={loading} error = {error} result={result}>
-
+       <DrinkFinderResultsView drinks={result} />
     </QueryWrapper>
-
   </div>
 
 

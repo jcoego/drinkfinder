@@ -80,7 +80,8 @@ const useDrinkFinder = (combos)=>{
 
     const onClickSearchFields = async ()=>{
       try{
-        debugger
+        
+        //initialize variables
         setLoading(true);
         setError(null);
         setResult(null);
@@ -93,6 +94,7 @@ const useDrinkFinder = (combos)=>{
           !searchFields.category && !searchFields.glass && !searchFields.ingredient){
             throw new Error('No filters Found. At least one filter is mandatory');
         }
+        //filter in database
         if(searchFields.name){
           filteredByName = await axios.get(`${getUrl()}/search.php?s=${searchFields.name}`);
           filteredByName = filteredByName && filteredByName.data ? filteredByName.data : [];
@@ -139,7 +141,6 @@ const useDrinkFinder = (combos)=>{
           if(drink) drinks.push(drink);
         }
       
-
         setResult(drinks);
         setError(null)
 
