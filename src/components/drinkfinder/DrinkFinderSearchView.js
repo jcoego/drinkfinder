@@ -17,7 +17,7 @@ import { width } from '@mui/system';
 
 const DrinkFinderSearchView = ({comboCategories=[], comboGlasses=[], comboIngredients=[], comboAlocholic=[],
                                 category='', glass='', ingredient='', alcoholic='', name='',
-                                onChange=()=>{},
+                                onChange=()=>{}, onClick=()=>{},
                                 ...props})=>{
 
   return  <Box 
@@ -82,7 +82,7 @@ const DrinkFinderSearchView = ({comboCategories=[], comboGlasses=[], comboIngred
               
               <div style = {{width: '100%'}}></div>
 
-              <Button variant="outlined" startIcon={<SearchIcon />}>
+              <Button onClick={e => onClick({type:'search'})} variant="outlined" startIcon={<SearchIcon />}>
                 Search
               </Button>
           </Box>
