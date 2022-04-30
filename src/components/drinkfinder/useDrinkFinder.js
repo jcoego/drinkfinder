@@ -40,6 +40,10 @@ const transformComboData = (combos) =>{
         }
       }) : []
 
+      //Add no selection: TODO
+     /*  categories = [{value:'',name:'None'}, ...categories] */
+
+
     return {categories, glasses, ingredients, alcoholic}
 }
 

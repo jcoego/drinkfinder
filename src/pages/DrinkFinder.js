@@ -8,6 +8,7 @@ const DrinkFinder = ()=>{
   const [combosState] = useContext(CombosContext);
   const [combos, searchFields,{onChangeSearchFields}] = useDrinkFinder(combosState);
 
+  console.log('searchFields',searchFields, combos)
   
   return <div>
     <DrinkFinderSearchView
