@@ -58,12 +58,18 @@ const defaultSearchFields = {
     name:''
 }
 
+const defaultDrinkDetails = {
+  openDrinkDetails: false,
+  drinkDetails: {}
+}
+
 const useDrinkFinder = (combos)=>{
     let {categories, glasses, ingredients, alcoholic} = transformComboData(combos);
     let [searchFields, setSearchFields]= useState(defaultSearchFields);
     let [result, setResult] = useState([]);
     let [loading, setLoading] = useState(null);
-    let [error, setError] = useState(null)
+    let [error, setError] = useState(null);
+    let [drinkDetails, setDrinkDetails] = useState(defaultDrinkDetails);
 
     const onChangeSearchFields = (data)=>{
       if(data.type==='alcoholic'){
@@ -153,10 +159,18 @@ const useDrinkFinder = (combos)=>{
       }
     }
 
+    const onClickDetails = (drink)=>{
+      setDrinkDetails({...drinkDetails, openDrinkDetails: true, drinkDetails: drink})
+    }
+
+    const onCloseDetails = ()=>{
+      setDrinkDetails({...drinkDetails, openDrinkDetails: false, drinkDetails: {}})
+    }
 
     return [{categories, glasses, ingredients, alcoholic}, 
-      searchFields, {onChangeSearchFields, onClickSearchFields},
-      {loading, error, result}
+      searchFields, {onChangeSearchFields, onClickSearchFields, onClickDetails, onCloseDetails},
+      {loading, error, result}, 
+      {openDetails: drinkDetails.openDrinkDetails, drinkDetails: drinkDetails.drinkDetails}
     ]
 
 }

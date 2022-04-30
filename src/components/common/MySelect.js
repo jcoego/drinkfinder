@@ -4,7 +4,7 @@ import InputLabel from '@mui/material/InputLabel';
 
 const MySelect = ({labelId, labelName, value, onChange, items,...props })=>{
     return (
-    <>
+    <div>
         <InputLabel id={labelId}>{labelName}</InputLabel>
         <Select
         labelId={labelId}
@@ -18,7 +18,7 @@ const MySelect = ({labelId, labelName, value, onChange, items,...props })=>{
             ))
           }
         </Select>
-    </>
+    </div>
     )
 }
 

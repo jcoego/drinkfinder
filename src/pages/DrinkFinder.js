@@ -4,15 +4,23 @@ import { CombosContext } from "../components/providers/CombosProviders";
 import useDrinkFinder  from '../components/drinkfinder/useDrinkFinder';
 import QueryWrapper from "../components/common/QueryWrapper";
 import DrinkFinderResultsView from "../components/drinkfinder/DrinkFinderResultsView";
+import DrinkFinderModalDetails from "../components/drinkfinder/DrinkFinderModalDetails";
 
 const DrinkFinder = ()=>{
 
   const [combosState] = useContext(CombosContext);
-  const [combos, searchFields,{onChangeSearchFields,onClickSearchFields},
-    {loading, error, result}] = useDrinkFinder(combosState);
+  const [combos, searchFields,{onChangeSearchFields,onClickSearchFields, onClickDetails, onCloseDetails},
+    {loading, error, result},
+    {openDetails, drinkDetails}
+  ] = useDrinkFinder(combosState);
 
-  console.log('res', error, result)
   return <div>
+    <DrinkFinderModalDetails 
+      open={openDetails}
+      drink={drinkDetails}
+      handleClose={e => onCloseDetails()}
+    />
+
     <DrinkFinderSearchView
       comboCategories={combos.categories}
       comboGlasses={combos.glasses}
@@ -28,7 +36,7 @@ const DrinkFinder = ()=>{
     />
 
     <QueryWrapper loading={loading} error = {error} result={result}>
-       <DrinkFinderResultsView drinks={result} />
+       <DrinkFinderResultsView drinks={result} onClick={drink => onClickDetails(drink)} />
     </QueryWrapper>
   </div>
 

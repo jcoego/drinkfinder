@@ -61,24 +61,6 @@ const DrinkFinderSearchView = ({comboCategories=[], comboGlasses=[], comboIngred
                 onChange={(e)=>onChange({type:'glass', value: e.target.value})} 
                 items ={comboGlasses}
               />
-
-
-              <InputLabel id="glass-label-id">Glass</InputLabel>
-              <Select
-                labelId="glass-label-id"
-                id="glass-id"
-                value={''}
-                onChange={()=>{}}
-                label="Glass"
-                sx={{width:'25%'}}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
               
               <div style = {{width: '100%'}}></div>
 
