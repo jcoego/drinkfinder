@@ -12,7 +12,10 @@ import FormLabel from '@mui/material/FormLabel';
 
 import MySelect from '../common/MySelect';
 
-const DrinkFinderSearchView = ()=>{
+const DrinkFinderSearchView = ({comboCategories=[], comboGlasses=[], comboIngredients=[], comboAlocholic=[],
+                                category='', glass='', ingredient='', alocholic='',
+                                onChange=()=>{},
+                                ...props})=>{
   return  <Box 
             sx={{margin:'40px 40px 20px 40px', display: 'flex', 
             flexWrap:'wrap', justifyContent:'center' }}>
@@ -29,26 +32,27 @@ const DrinkFinderSearchView = ()=>{
               <MySelect 
                 labelId={'ingredient-label-id'} 
                 labelName={'Ingredient'}
-                value={''}
-                onChange={()=>{}} 
-                items ={[{value:0,name:'Jose'}, {value:1, name:'Ric'}]}
+                value={ingredient}
+                onChange={(e)=>onChange({type:'ingredient', value: e.target.value})} 
+                items ={comboIngredients}
               />
 
-            <MySelect 
-                labelId={'category-label-id'} 
-                labelName={'Category'}
-                value={''}
-                onChange={()=>{}} 
-                items ={[{value:0,name:'Jose'}, {value:1, name:'Ric'}]}
-              />
+              <MySelect 
+                  labelId={'category-label-id'} 
+                  labelName={'Category'}
+                  value={category}
+                  onChange={(e)=>onChange({type:'category', value: e.target.value})} 
+                  items ={comboCategories}
+                />
 
                <MySelect 
                 labelId={'glass-label-id'} 
                 labelName={'Glass'}
-                value={''}
-                onChange={()=>{}} 
-                items ={[{value:0,name:'Jose'}, {value:1, name:'Ric'}]}
+                value={glass}
+                onChange={(e)=>onChange({type:'glass', value: e.target.value})} 
+                items ={comboGlasses}
               />
+
 
               <InputLabel id="glass-label-id">Glass</InputLabel>
               <Select

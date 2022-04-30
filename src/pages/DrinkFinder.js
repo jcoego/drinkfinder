@@ -1,9 +1,26 @@
+import { useContext } from "react";
 import DrinkFinderSearchView from "../components/drinkfinder/DrinkFinderSearchView";
+import { CombosContext } from "../components/providers/CombosProviders";
+import useDrinkFinder  from '../components/drinkfinder/useDrinkFinder'
 
 const DrinkFinder = ()=>{
 
+  const [combosState] = useContext(CombosContext);
+  const [combos, searchFields,{onChangeSearchFields}] = useDrinkFinder(combosState);
+
+  
   return <div>
-    <DrinkFinderSearchView />
+    <DrinkFinderSearchView
+      comboCategories={combos.categories}
+      comboGlasses={combos.glasses}
+      comboIngredients={combos.ingredients}
+      comboAlcoholic={combos.alcoholic}
+      category={searchFields.category}
+      glass={searchFields.glass}
+      ingredient={searchFields.ingredient} 
+      alocholic={searchFields.alocholic}
+      onChange = {onChangeSearchFields}
+    />
   </div>
 
 
