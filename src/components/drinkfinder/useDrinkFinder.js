@@ -47,7 +47,8 @@ const defaultSearchFields = {
     category:'',
     glass:'',
     ingredient:'', 
-    alocholic:''
+    alcoholic:'Alcoholic',
+    name:''
 }
 
 const useDrinkFinder = (combos)=>{
@@ -55,7 +56,16 @@ const useDrinkFinder = (combos)=>{
     let [searchFields, setSearchFields]= useState(defaultSearchFields);
 
     const onChangeSearchFields = (data)=>{
-       setSearchFields({...searchFields, [data.type]:data.value})
+      if(data.type==='alcoholic'){
+        if(data.value==='Alcoholic'){
+          setSearchFields({...searchFields,alcoholic:"Non alcoholic"})
+        }else {
+          setSearchFields({...searchFields,alcoholic:"Alcoholic"})
+        }
+        return
+      }
+
+      setSearchFields({...searchFields, [data.type]:data.value})
     }
 
 

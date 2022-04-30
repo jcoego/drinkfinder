@@ -13,21 +13,28 @@ import FormLabel from '@mui/material/FormLabel';
 import MySelect from '../common/MySelect';
 
 const DrinkFinderSearchView = ({comboCategories=[], comboGlasses=[], comboIngredients=[], comboAlocholic=[],
-                                category='', glass='', ingredient='', alocholic='',
+                                category='', glass='', ingredient='', alcoholic='', name='',
                                 onChange=()=>{},
                                 ...props})=>{
+
+                                  console.log('alcoholicJCM',alcoholic)
   return  <Box 
             sx={{margin:'40px 40px 20px 40px', display: 'flex', 
             flexWrap:'wrap', justifyContent:'center' }}>
 
               <FormControlLabel
-                value="start"
-                control={<Checkbox />}
+                value={alcoholic}
+                control={<Checkbox onChange = {e => onChange({type:'alcoholic', value:e.target.value})} 
+                          checked={alcoholic === 'Alcoholic'} />}
                 label="Alcoholic"
                 labelPlacement="start"
               />
 
-              <TextField id="standard-basic" label="Name" variant="standard" />
+              <TextField id="standard-basic"
+                label="Name" variant="standard" 
+                value={name}
+                onChange={e => onChange({type:'name', value:e.target.value})} 
+              />
 
               <MySelect 
                 labelId={'ingredient-label-id'} 

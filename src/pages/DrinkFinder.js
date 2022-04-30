@@ -18,7 +18,8 @@ const DrinkFinder = ()=>{
       category={searchFields.category}
       glass={searchFields.glass}
       ingredient={searchFields.ingredient} 
-      alocholic={searchFields.alocholic}
+      alcoholic={searchFields.alcoholic}
+      name= {searchFields.name}
       onChange = {onChangeSearchFields}
     />
   </div>
