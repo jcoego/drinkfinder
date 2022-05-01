@@ -120,6 +120,7 @@ const useDrinkFinder = (combos)=>{
           filteredByGlass = await axios.get(`${getUrl()}/filter.php?g=${searchFields.glass}`);
           filteredByGlass = filteredByGlass && filteredByGlass.data ? filteredByGlass.data : [];
         }
+        debugger
         if(searchFields.ingredient){
           filteredByIngredient = await axios.get(`${getUrl()}/filter.php?i=${searchFields.ingredient}`);
           filteredByIngredient = filteredByIngredient && filteredByIngredient.data ? filteredByIngredient.data : [];

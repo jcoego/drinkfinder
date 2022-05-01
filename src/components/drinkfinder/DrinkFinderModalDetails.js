@@ -31,7 +31,7 @@ const DrinkFinderModalDetails = ({open=false, drink={}, handleClose=()=>{}, ...p
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
+          <Button variant="outlined" onClick={handleClose}>Close</Button>
         </DialogActions>
     </Dialog>)
 

@@ -21,12 +21,12 @@ const DrinkFinderSearchView = ({comboCategories=[], comboGlasses=[], comboIngred
                                 ...props})=>{
 
   return  <Box 
-            sx={{margin:'40px 40px 20px 40px', display: 'flex', 
+            sx={{margin:'10px 40px 20px 40px', display: 'flex', 
             flexWrap:'wrap', justifyContent:'center',
             //border: '1px solid grey',
             backgroundColor: 'rgb(228,228,228)',
             borderRadius: '7px',
-            padding:'7px'
+            padding:'10px'
              }}>
 
               <FormControlLabel

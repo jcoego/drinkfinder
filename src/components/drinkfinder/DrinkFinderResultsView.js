@@ -24,8 +24,8 @@ const DrinkFinderResultsView = ({drinks, onClick=()=>{}, ...props })=>{
         <Table sx={{  }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="center">Image</TableCell>
-              <TableCell align="center">Description</TableCell>
+              <TableCell align="left">Image</TableCell>
+              <TableCell align="left">Description</TableCell>
               <TableCell align="left">Ingredients</TableCell>
             </TableRow>
           </TableHead>

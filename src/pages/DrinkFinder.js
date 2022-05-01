@@ -5,6 +5,7 @@ import useDrinkFinder  from '../components/drinkfinder/useDrinkFinder';
 import QueryWrapper from "../components/common/QueryWrapper";
 import DrinkFinderResultsView from "../components/drinkfinder/DrinkFinderResultsView";
 import DrinkFinderModalDetails from "../components/drinkfinder/DrinkFinderModalDetails";
+import DrinkFinderAppBar from "../components/drinkfinder/DrinkFinderAppBar";
 
 const DrinkFinder = ()=>{
 
@@ -20,7 +21,7 @@ const DrinkFinder = ()=>{
       drink={drinkDetails}
       handleClose={e => onCloseDetails()}
     />
-
+     <DrinkFinderAppBar title={'DRINK FINDER'} />
     <DrinkFinderSearchView
       comboCategories={combos.categories}
       comboGlasses={combos.glasses}
