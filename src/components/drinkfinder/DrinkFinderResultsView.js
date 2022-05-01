@@ -1,11 +1,9 @@
-import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+
 
 const DrinkFinderResultsView = ({drinks, onClick=()=>{}, ...props })=>{
     let drinkWithIngredients=[]
@@ -57,41 +55,6 @@ const DrinkFinderResultsView = ({drinks, onClick=()=>{}, ...props })=>{
       </div>
     )
 
-    return <div>
-        {
-            drinkWithIngredients && drinkWithIngredients.map((drink)=>(
-            <Box 
-                sx={{display: 'flex', padding: '15px', margin: '3px',
-                flexWrap:'wrap', justifyContent:'left', border:'1px solid grey' }}>
-
-             <div><img src={drink.strDrinkThumb} width="100px" alt="Paris"/> </div>
-             <div style={{marginLeft: '5px', textAlign:'left'}}>
-                <strong> {drink.strDrink}</strong>
-                <div>{drink.strAlcoholic}</div>
-                <div>{drink.strCategory}</div>
-                <div>{drink.strGlass}</div>
-            </div>
-            <div style={{marginLeft: '25px', textAlign:'left',
-                wordWrap: 'break-word', border: '1px dashed grey',
-                padding: '5px'
-            }}>
-                <div><u>Ingredients:</u></div>
-                <ul>
-                    {
-                        drink._ingredients && drink._ingredients.map((ing)=>(
-                            <li>{ing}</li>
-                        ))
-                    }
-                    <li>INg</li>
-                </ul>
-               
-            </div>
-    
-            </Box>
-            ))
-       
-        }
-    </div>
 }
 
 export default DrinkFinderResultsView;

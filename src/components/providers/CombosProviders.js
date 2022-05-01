@@ -63,33 +63,36 @@ const CombosProvider = ({children, ...props})=>{
         dispatch({type: SET_ALCOHOLIC, payload: alcoholic})
     }
 
-    //business logic functions
-    const getCombos = async ()=>{
-      try{
-
-        let categories = await axios.get(`${getUrl()}/list.php?c=list`);
-        let glasses = await axios.get(`${getUrl()}/list.php?g=list`);
-        let ingredients = await axios.get(`${getUrl()}/list.php?i=list`);
-        let alcoholic = await axios.get(`${getUrl()}/list.php?a=list`);
-      
-        categories = (!categories || !categories.data || !categories.data.drinks) ? [] : categories.data.drinks.map(cat => cat.strCategory)
-        glasses = (!glasses || !glasses.data || !glasses.data.drinks) ? [] : glasses.data.drinks.map(glass => glass.strGlass)
-        ingredients = (!ingredients || !ingredients.data || !ingredients.data.drinks) ? [] : ingredients.data.drinks.map(ing => ing.strIngredient1)
-        alcoholic = (!alcoholic || !alcoholic.data || !alcoholic.data.drinks) ? [] : alcoholic.data.drinks.map(alc => alc.strAlcoholic)
-
-        setCombos({categories, glasses, ingredients, alcoholic});
-      }catch(err){
-        throw err;
-      }
-    }
+    //business logic functions. If necessary.
+   
 
     //initialize combos
     useEffect(()=>{
-        getCombos()
-          .then(()=>{})
-          .catch(err => {
-            handleErrors(err);
-          });
+      //getCombos implementation
+      const getCombos = async ()=>{
+        try{
+  
+          let categories = await axios.get(`${getUrl()}/list.php?c=list`);
+          let glasses = await axios.get(`${getUrl()}/list.php?g=list`);
+          let ingredients = await axios.get(`${getUrl()}/list.php?i=list`);
+          let alcoholic = await axios.get(`${getUrl()}/list.php?a=list`);
+        
+          categories = (!categories || !categories.data || !categories.data.drinks) ? [] : categories.data.drinks.map(cat => cat.strCategory)
+          glasses = (!glasses || !glasses.data || !glasses.data.drinks) ? [] : glasses.data.drinks.map(glass => glass.strGlass)
+          ingredients = (!ingredients || !ingredients.data || !ingredients.data.drinks) ? [] : ingredients.data.drinks.map(ing => ing.strIngredient1)
+          alcoholic = (!alcoholic || !alcoholic.data || !alcoholic.data.drinks) ? [] : alcoholic.data.drinks.map(alc => alc.strAlcoholic)
+  
+          setCombos({categories, glasses, ingredients, alcoholic});
+        }catch(err){
+          throw err;
+        }
+      }
+      //call getCombos
+      getCombos()
+        .then(()=>{})
+        .catch(err => {
+          handleErrors(err);
+        });
 
     },[])
 

@@ -1,22 +1,11 @@
 import './App.css';
 import DrinkFinder from './pages/DrinkFinder';
-import { Router, Link } from "@reach/router";
+import { Router} from "@reach/router";
 import CombosProvider from './components/providers/CombosProviders';
-import { createTheme, ThemeProvider, styled, useTheme } from '@mui/material/styles';
+import { createTheme, ThemeProvider} from '@mui/material/styles';
+import {getStyles} from './utils/config'
 
-const theme = createTheme({
-  palette: {
-    primary:{
-      main: 'rgb(67,55,117)',
-      contrastText:'#FFFFFF'
-    },
-    secondary:{
-      main: '#FFBD35',
-      contrastText:'#838080'
-    }
-  }
- 
-});
+const theme = createTheme(getStyles());
 
 function App() {
   return (

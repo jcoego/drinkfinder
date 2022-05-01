@@ -18,7 +18,7 @@ const DrinkFinderModalDetails = ({open=false, drink={}, handleClose=()=>{}, ...p
           {drink.strDrink}
         </DialogTitle>
         <DialogContent>
-          <img src={drink.strDrinkThumb} width="300px" /> 
+          <img src={drink.strDrinkThumb} alt={drink.strDrink} width="300px" /> 
           <hr/>
           <DialogContentText>
              <strong>Ingredients:</strong>

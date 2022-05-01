@@ -6,3 +6,10 @@ export const getUrl = (env)=>{
     }
     return config['url'];
 }
+
+export const getStyles = (env) =>{
+    if(!env || env === 'D'){
+        return config['styles'];
+    }
+    return config['styles'];
+}

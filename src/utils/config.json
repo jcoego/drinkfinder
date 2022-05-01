@@ -1,3 +1,15 @@
 {
-    "url":"https://www.thecocktaildb.com/api/json/v1/1"
+    "url":"https://www.thecocktaildb.com/api/json/v1/1",
+    "styles":{
+            "palette": {
+              "primary":{
+                "main": "rgb(67,55,117)",
+                "contrastText":"#FFFFFF"
+              },
+              "secondary":{
+                "main": "rgb(227,120,75)",
+                "contrastText":"#838080"
+              }
+            }  
+    }
 }
