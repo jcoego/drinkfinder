@@ -43,9 +43,9 @@ const transformComboData = (combos) =>{
         }
       }) : []
 
-      //Add no selection: TODO
-     /*  categories = [{value:'',name:'None'}, ...categories] */
-
+     categories.unshift({value:'',name:'--No selection--' });
+     glasses.unshift({value:'',name:'--No selection--' });
+     ingredients.unshift({value:'',name:'--No selection--' });
 
     return {categories, glasses, ingredients, alcoholic}
 }
@@ -96,6 +96,7 @@ const useDrinkFinder = (combos)=>{
         let filteredByCategory = null;
         let filteredByGlass = null;
         let filteredByIngredient = null;
+        debugger
         if(!searchFields.name && searchFields.alcoholic !=='Alcoholic' && 
           !searchFields.category && !searchFields.glass && !searchFields.ingredient){
             throw new Error('No filters Found. At least one filter is mandatory');
@@ -105,10 +106,10 @@ const useDrinkFinder = (combos)=>{
           filteredByName = await axios.get(`${getUrl()}/search.php?s=${searchFields.name}`);
           filteredByName = filteredByName && filteredByName.data ? filteredByName.data : [];
         }
-        if(searchFields.alcoholic==='Alcoholic'){
-          filteredByAlcoholic = await axios.get(`${getUrl()}/filter.php?a=Alcoholic`);
-          filteredByAlcoholic = filteredByAlcoholic && filteredByAlcoholic.data ? filteredByAlcoholic.data : [];
-        }
+       
+        filteredByAlcoholic = await axios.get(`${getUrl()}/filter.php?a=${searchFields.alcoholic}`);
+        filteredByAlcoholic = filteredByAlcoholic && filteredByAlcoholic.data ? filteredByAlcoholic.data : [];
+        
         if(searchFields.category){
         
           filteredByCategory = await axios.get(`${getUrl()}/filter.php?c=${searchFields.category}`);
@@ -120,7 +121,7 @@ const useDrinkFinder = (combos)=>{
           filteredByGlass = filteredByGlass && filteredByGlass.data ? filteredByGlass.data : [];
         }
         if(searchFields.ingredient){
-          filteredByIngredient = await axios.get(`${getUrl()}/search.php?i=${searchFields.ingredient}`);
+          filteredByIngredient = await axios.get(`${getUrl()}/filter.php?i=${searchFields.ingredient}`);
           filteredByIngredient = filteredByIngredient && filteredByIngredient.data ? filteredByIngredient.data : [];
         }
 

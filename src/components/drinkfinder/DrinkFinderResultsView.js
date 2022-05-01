@@ -20,39 +20,41 @@ const DrinkFinderResultsView = ({drinks, onClick=()=>{}, ...props })=>{
     }
 
     return (
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="center">Image</TableCell>
-            <TableCell align="center">Description</TableCell>
-            <TableCell align="left">Ingredients</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {drinkWithIngredients && drinkWithIngredients.map((drink) => (
-            <TableRow
-              key={drink.idDrink}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 }, '&:hover': {
-                cursor: 'pointer'
-              } }}
-              onClick={e => onClick(drink)}
-            >
-              <TableCell component="th" scope="row">
-                <img src={drink.strDrinkThumb} width="100px" alt="Paris"/> 
-              </TableCell>
-              <TableCell align="left">
-                <div style={{marginLeft: '5px', textAlign:'left'}}>
-                    <strong>{drink.strDrink}</strong>
-                    <div>{drink.strAlcoholic}</div>
-                    <div>{drink.strCategory}</div>
-                    <div>{drink.strGlass}</div>
-                </div>
-              </TableCell>
-              <TableCell align="left">{drink._ingredients.join(', ')}</TableCell>
+      <div style={{padding:'45px'}}>
+        <Table sx={{  }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">Image</TableCell>
+              <TableCell align="center">Description</TableCell>
+              <TableCell align="left">Ingredients</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {drinkWithIngredients && drinkWithIngredients.map((drink) => (
+              <TableRow
+                key={drink.idDrink}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 }, '&:hover': {
+                  cursor: 'pointer'
+                } }}
+                onClick={e => onClick(drink)}
+              >
+                <TableCell component="th" scope="row">
+                  <img src={drink.strDrinkThumb} width="100px" alt="Paris"/> 
+                </TableCell>
+                <TableCell align="left">
+                  <div style={{marginLeft: '5px', textAlign:'left'}}>
+                      <strong>{drink.strDrink}</strong>
+                      <div>{drink.strAlcoholic}</div>
+                      <div>{drink.strCategory}</div>
+                      <div>{drink.strGlass}</div>
+                  </div>
+                </TableCell>
+                <TableCell align="left">{drink._ingredients.join(', ')}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     )
 
     return <div>

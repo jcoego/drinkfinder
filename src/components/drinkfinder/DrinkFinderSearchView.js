@@ -22,10 +22,16 @@ const DrinkFinderSearchView = ({comboCategories=[], comboGlasses=[], comboIngred
 
   return  <Box 
             sx={{margin:'40px 40px 20px 40px', display: 'flex', 
-            flexWrap:'wrap', justifyContent:'center' }}>
+            flexWrap:'wrap', justifyContent:'center',
+            //border: '1px solid grey',
+            backgroundColor: 'rgb(228,228,228)',
+            borderRadius: '7px',
+            padding:'7px'
+             }}>
 
               <FormControlLabel
                 value={alcoholic}
+                sx={{marginRight:'7px'}}
                 control={<Checkbox onChange = {e => onChange({type:'alcoholic', value:e.target.value})} 
                           checked={alcoholic === 'Alcoholic'} />}
                 label="Alcoholic"
@@ -33,8 +39,10 @@ const DrinkFinderSearchView = ({comboCategories=[], comboGlasses=[], comboIngred
               />
 
               <TextField id="standard-basic"
-                label="Name" variant="standard" 
+                label="Name" 
+                variant="outlined" 
                 value={name}
+                sx={{marginTop:'32px'}}
                 onChange={e => onChange({type:'name', value:e.target.value})} 
               />
 
@@ -64,7 +72,7 @@ const DrinkFinderSearchView = ({comboCategories=[], comboGlasses=[], comboIngred
               
               <div style = {{width: '100%'}}></div>
 
-              <Button onClick={e => onClick({type:'search'})} variant="outlined" startIcon={<SearchIcon />}>
+              <Button onClick={e => onClick({type:'search'})} variant="contained" startIcon={<SearchIcon />}>
                 Search
               </Button>
           </Box>
