@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react";
 import { getUrl } from "../../utils/config";
-import { arrayIntersection } from "../../utils/utils";
+import { arrayIntersection, encodeQueryParams } from "../../utils/utils";
 
 
 const transformComboData = (combos) =>{
@@ -103,26 +103,29 @@ const useDrinkFinder = (combos)=>{
         }
         //filter in database
         if(searchFields.name){
-          filteredByName = await axios.get(`${getUrl()}/search.php?s=${searchFields.name}`);
+          let queryParams = encodeQueryParams({s:searchFields.name})
+          filteredByName = await axios.get(`${getUrl()}/search.php?${queryParams}`);
           filteredByName = filteredByName && filteredByName.data ? filteredByName.data : [];
         }
        
-        filteredByAlcoholic = await axios.get(`${getUrl()}/filter.php?a=${searchFields.alcoholic}`);
+        let queryParamsAlocoholic = encodeQueryParams({a:searchFields.alcoholic})
+        filteredByAlcoholic = await axios.get(`${getUrl()}/filter.php?${queryParamsAlocoholic}`);
         filteredByAlcoholic = filteredByAlcoholic && filteredByAlcoholic.data ? filteredByAlcoholic.data : [];
         
         if(searchFields.category){
-        
-          filteredByCategory = await axios.get(`${getUrl()}/filter.php?c=${searchFields.category}`);
+          let queryParams = encodeQueryParams({c:searchFields.category})
+          filteredByCategory = await axios.get(`${getUrl()}/filter.php?${queryParams}`);
           filteredByCategory = filteredByCategory && filteredByCategory.data ? filteredByCategory.data : [];
           
         }
         if(searchFields.glass){
-          filteredByGlass = await axios.get(`${getUrl()}/filter.php?g=${searchFields.glass}`);
+          let queryParams = encodeQueryParams({g:searchFields.glass});
+          filteredByGlass = await axios.get(`${getUrl()}/filter.php?${queryParams}`);
           filteredByGlass = filteredByGlass && filteredByGlass.data ? filteredByGlass.data : [];
         }
-        debugger
         if(searchFields.ingredient){
-          filteredByIngredient = await axios.get(`${getUrl()}/filter.php?i=${searchFields.ingredient}`);
+          let queryParams = encodeQueryParams({i:searchFields.ingredient});
+          filteredByIngredient = await axios.get(`${getUrl()}/filter.php?${queryParams}`);
           filteredByIngredient = filteredByIngredient && filteredByIngredient.data ? filteredByIngredient.data : [];
         }
 

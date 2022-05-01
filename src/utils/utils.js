@@ -7,3 +7,12 @@ export const arrayIntersection = (arr1, arr2)=>{
 
     return commonItems;
 }
+
+export const encodeQueryParams = (paramsAsObject) => {
+    try{
+        const queryString = new URLSearchParams(paramsAsObject).toString();
+        return queryString;
+    }catch(err){
+        return ''
+    }
+}
